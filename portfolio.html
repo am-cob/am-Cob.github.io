@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cob.</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #FFFFFF;
+            color: #000000;
+            transition: all 0.5s ease;
+        }
+        .container {
+            max-width: 800px;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 21pt;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 12pt;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 10px;
+            margin-top: 30px;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+        li {
+            margin-left: 40px;
+            font-size: 12pt;
+        }
+        .dark-mode-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 12pt;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            font-size: 12pt;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .dark-mode-btn:hover, .home-btn:hover {
+            text-decoration: underline;
+        }
+        .dark {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .dark h1, .dark h2, .dark li {
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>portfolio.</h1>
+        <div class="dark-mode-btn">Dark</div>
+        <div class="home-btn">Home</div>
+    </div>
+  <script>
+        const darkModeBtn = document.querySelector('.dark-mode-btn');
+        const homeBtn = document.querySelector('.home-btn');
+        const body = document.querySelector('body');
+        let isDarkMode = false;
+        // check if dark mode is enabled in cookie
+        const cookieDarkMode = document.cookie.match(/^(.*;)?\s*darkmode\s*=\s*([^;]+)(;|$)/);
+        if (cookieDarkMode && cookieDarkMode[2] === 'true') {
+            isDarkMode = true;
+            body.classList.add('dark');
+            darkModeBtn.innerHTML = 'Light';
+		body.style.transition = 'none'; // disable fade-in transition
+        }
+        darkModeBtn.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            if (isDarkMode) {
+                body.classList.add('dark');
+                darkModeBtn.innerHTML = 'Light';
+                // set dark mode cookie
+                document.cookie = "darkmode=true; path=/";
+            } else {
+                body.classList.remove('dark');
+                darkModeBtn.innerHTML = 'Dark';
+                // set light mode cookie
+                document.cookie = "darkmode=false; path=/";
+            }
+        });
+        homeBtn.addEventListener('click', () => {
+            window.location.href = 'home.html';
+        });
+    </script>
+</body>
+</

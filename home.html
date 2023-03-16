@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cob.</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #FFFFFF;
+            color: #000000;
+            transition: all 0.5s ease;
+        }
+        .container {
+            max-width: 800px;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 21pt;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 12pt;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 10px;
+            margin-top: 30px;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+        li {
+            margin-left: 40px;
+            font-size: 12pt;
+        }
+        .dark-mode-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 12pt;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .dark-mode-btn:hover {
+            text-decoration: underline;
+        }
+        .dark {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .dark h1, .dark h2, .dark li {
+            color: #e0e0e0;
+        }
+        .portfolio-link {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .portfolio-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>cob.</h1>
+        <h2>1. about me</h2>
+        <ul>
+            <li>a. 17 y/o</li>
+            <li>b. avid photographer</li>
+            <li>c. aspiring cinematographer</li>
+        </ul>
+        <h2>2. socials</h2>
+        <ul>
+            <li>a. twitter</li>
+            <li>b. discord</li>
+            <li>c. twitch</li>
+        </ul>
+        <h2>3. portfolio</h2>
+        <ul>
+            <li><a class="portfolio-link" href="portfolio.html">a. photography</a></li>
+            <li><a class="portfolio-link" href="portfolio.html">b. cinematography</a></li>
+        </ul>
+        <div class="dark-mode-btn">Dark</div>
+    </div>
+  <script>
+        const darkModeBtn = document.querySelector('.dark-mode-btn');
+        const homeBtn = document.querySelector('.home-btn');
+        const body = document.querySelector('body');
+        let isDarkMode = false;
+        // check if dark mode is enabled in cookie
+        const cookieDarkMode = document.cookie.match(/^(.*;)?\s*darkmode\s*=\s*([^;]+)(;|$)/);
+        if (cookieDarkMode && cookieDarkMode[2] === 'true') {
+            isDarkMode = true;
+            body.classList.add('dark');
+            darkModeBtn.innerHTML = 'Light';
+		body.style.transition = 'none'; // disable fade-in transition
+        }
+        darkModeBtn.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            if (isDarkMode) {
+                body.classList.add('dark');
+                darkModeBtn.innerHTML = 'Light';
+                // set dark mode cookie
+                document.cookie = "darkmode=true; path=/";
+            } else {
+                body.classList.remove('dark');
+                darkModeBtn.innerHTML = 'Dark';
+                // set light mode cookie
+                document.cookie = "darkmode=false; path=/";
+            }
+        });
+    </script>
+</body>
+</html>
