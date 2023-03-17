@@ -14,14 +14,14 @@
             height: 100vh;
             background-color: #FFFFFF;
             color: #000000;
-            transition: all 0.5s ease;
+            transition: all 0.75s ease;
         }
         .container {
             max-width: 800px;
             padding: 50px 20px;
             text-align: center;
         }
-	  .disable-transition {
+	  .no-transition {
             transition: none !important;
         }
         h1 {
@@ -112,7 +112,7 @@
     body.classList.add('no-transition');
     setTimeout(() => {
         body.classList.remove('no-transition');
-    }, 1000); // set timeout for 1 sec
+    }, 500); // set timeout for half a sec
     darkModeBtn.addEventListener('click', () => {
         isDarkMode = !isDarkMode;
         if (isDarkMode) {
