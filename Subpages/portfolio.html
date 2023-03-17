@@ -125,5 +125,11 @@
     homeBtn.addEventListener('click', () => {
         window.location.href = '../index.html';
     });
+
+    // redirect to mobile.html if on mobile device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+        window.location.href = '../mobile.html';
+    }
 </script>
 </body>
