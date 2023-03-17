@@ -21,6 +21,9 @@
             padding: 50px 20px;
             text-align: center;
         }
+	  .disable-transition {
+            transition: none !important;
+        }
         h1 {
             font-size: 21pt;
             font-weight: bold;
@@ -93,33 +96,36 @@
         </ul>
         <div class="dark-mode-btn">Dark</div>
     </div>
-  <script>
-        const darkModeBtn = document.querySelector('.dark-mode-btn');
-        const homeBtn = document.querySelector('.home-btn');
-        const body = document.querySelector('body');
-        let isDarkMode = false;
-        // check if dark mode is enabled in cookie
-        const cookieDarkMode = document.cookie.match(/^(.*;)?\s*darkmode\s*=\s*([^;]+)(;|$)/);
-        if (cookieDarkMode && cookieDarkMode[2] === 'true') {
-            isDarkMode = true;
+<script>
+    const darkModeBtn = document.querySelector('.dark-mode-btn');
+    const homeBtn = document.querySelector('.home-btn');
+    const body = document.querySelector('body');
+    let isDarkMode = false;
+    // check if dark mode is enabled in cookie
+    const cookieDarkMode = document.cookie.match(/^(.*;)?\s*darkmode\s*=\s*([^;]+)(;|$)/);
+    if (cookieDarkMode && cookieDarkMode[2] === 'true') {
+        isDarkMode = true;
+        body.classList.add('dark');
+        darkModeBtn.innerHTML = 'Light';
+    }
+    // disable transition on page load
+    body.classList.add('no-transition');
+    setTimeout(() => {
+        body.classList.remove('no-transition');
+    }, 1000); // set timeout for 1 sec
+    darkModeBtn.addEventListener('click', () => {
+        isDarkMode = !isDarkMode;
+        if (isDarkMode) {
             body.classList.add('dark');
             darkModeBtn.innerHTML = 'Light';
-		body.style.transition = 'none'; // disable fade-in transition
+            // set dark mode cookie
+            document.cookie = "darkmode=true; path=/";
+        } else {
+            body.classList.remove('dark');
+            darkModeBtn.innerHTML = 'Dark';
+            // set light mode cookie
+            document.cookie = "darkmode=false; path=/";
         }
-        darkModeBtn.addEventListener('click', () => {
-            isDarkMode = !isDarkMode;
-            if (isDarkMode) {
-                body.classList.add('dark');
-                darkModeBtn.innerHTML = 'Light';
-                // set dark mode cookie
-                document.cookie = "darkmode=true; path=/";
-            } else {
-                body.classList.remove('dark');
-                darkModeBtn.innerHTML = 'Dark';
-                // set light mode cookie
-                document.cookie = "darkmode=false; path=/";
-            }
-        });
-    </script>
+    });
+</script>
 </body>
-</html>

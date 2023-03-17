@@ -51,15 +51,7 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .home-btn {
-            position: absolute;
-            top: 20px;
-            right: 80px;
-            font-size: 12pt;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .dark-mode-btn:hover, .home-btn:hover {
+        .dark-mode-btn:hover {
             text-decoration: underline;
         }
         .dark {
@@ -69,6 +61,28 @@
         .dark h1, .dark h2, .dark li {
             color: #e0e0e0;
         }
+        .portfolio-link {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .portfolio-link:hover {
+            text-decoration: underline;
+        }
+        .no-transition {
+            transition: none !important;
+        }
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            font-size: 12pt;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .home-btn:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -77,36 +91,39 @@
         <div class="dark-mode-btn">Dark</div>
         <div class="home-btn">Home</div>
     </div>
-  <script>
-        const darkModeBtn = document.querySelector('.dark-mode-btn');
-        const homeBtn = document.querySelector('.home-btn');
-        const body = document.querySelector('body');
-        let isDarkMode = false;
-        // check if dark mode is enabled in cookie
-        const cookieDarkMode = document.cookie.match(/^(.*;)?\s*darkmode\s*=\s*([^;]+)(;|$)/);
-        if (cookieDarkMode && cookieDarkMode[2] === 'true') {
-            isDarkMode = true;
+<script>
+    const darkModeBtn = document.querySelector('.dark-mode-btn');
+    const body = document.querySelector('body');
+    const homeBtn = document.querySelector('.home-btn');
+    let isDarkMode = false;
+    // check if dark mode is enabled in cookie
+    const cookieDarkMode = document.cookie.match(/^(.*;)?\s*darkmode\s*=\s*([^;]+)(;|$)/);
+    if (cookieDarkMode && cookieDarkMode[2] === 'true') {
+        isDarkMode = true;
+        body.classList.add('dark');
+        darkModeBtn.innerHTML = 'Light';
+    }
+    // disable transition on page load
+    body.classList.add('no-transition');
+    setTimeout(() => {
+        body.classList.remove('no-transition');
+    }, 1000); // set timeout for 1 sec
+    darkModeBtn.addEventListener('click', () => {
+        isDarkMode = !isDarkMode;
+        if (isDarkMode) {
             body.classList.add('dark');
             darkModeBtn.innerHTML = 'Light';
-		body.style.transition = 'none'; // disable fade-in transition
-        }
-        darkModeBtn.addEventListener('click', () => {
-            isDarkMode = !isDarkMode;
-            if (isDarkMode) {
-                body.classList.add('dark');
-                darkModeBtn.innerHTML = 'Light';
-                // set dark mode cookie
-                document.cookie = "darkmode=true; path=/";
-            } else {
-                body.classList.remove('dark');
-                darkModeBtn.innerHTML = 'Dark';
-                // set light mode cookie
-                document.cookie = "darkmode=false; path=/";
-            }
-        });
-        homeBtn.addEventListener('click', () => {
-            window.location.href = '../index.html';
-        });
-    </script>
+            // set dark mode cookie
+            document.cookie = "darkmode=true; path=/";
+        } else {
+            body.classList.remove('dark');
+            darkModeBtn.innerHTML = 'Dark';
+            // set light mode cookie
+            document.cookie = "darkmode=false; path=/";
+          }
+    });
+    homeBtn.addEventListener('click', () => {
+        window.location.href = '../index.html';
+    });
+</script>
 </body>
-</
