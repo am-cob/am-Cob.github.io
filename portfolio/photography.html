@@ -21,9 +21,6 @@
             padding: 50px 20px;
             text-align: center;
         }
-	  .no-transition {
-            transition: none !important;
-        }
         h1 {
             font-size: 21pt;
             font-weight: bold;
@@ -72,34 +69,32 @@
         .portfolio-link:hover {
             text-decoration: underline;
         }
+        .no-transition {
+            transition: none !important;
+        }
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            font-size: 12pt;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .home-btn:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>cob.</h1>
-        <h2>1. about me</h2>
-        <ul>
-            <li>a. 17 y/o</li>
-            <li>b. avid photographer</li>
-            <li>c. aspiring cinematographer</li>
-        </ul>
-        <h2>2. socials</h2>
-        <ul>
-            <li>a. twitter</li>
-            <li>b. discord</li>
-            <li>c. twitch</li>
-        </ul>
-        <h2>3. portfolio</h2>
-        <ul>
-            <li><a class="portfolio-link" href="portfolio/photography.html">a. photography</a></li>
-            <li><a class="portfolio-link" href="portfolio/cinematography.html">b. cinematography</a></li>
-        </ul>
+        <h1>portfolio.</h1>
         <div class="dark-mode-btn">Dark</div>
+        <div class="home-btn">Home</div>
     </div>
 <script>
     const darkModeBtn = document.querySelector('.dark-mode-btn');
-    const homeBtn = document.querySelector('.home-btn');
     const body = document.querySelector('body');
+    const homeBtn = document.querySelector('.home-btn');
     let isDarkMode = false;
     // check if dark mode is enabled in cookie
     const cookieDarkMode = document.cookie.match(/^(.*;)?\s*darkmode\s*=\s*([^;]+)(;|$)/);
@@ -125,12 +120,16 @@
             darkModeBtn.innerHTML = 'Dark';
             // set light mode cookie
             document.cookie = "darkmode=false; path=/";
-        }
+          }
     });
+    homeBtn.addEventListener('click', () => {
+        window.location.href = '../index.html';
+    });
+
     // redirect to mobile.html if on mobile device
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile) {
-        window.location.href = 'mobile.html';
+        window.location.href = '../mobile.html';
     }
 </script>
 </body>
