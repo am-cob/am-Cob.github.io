@@ -97,6 +97,10 @@
         <div class="dark-mode-btn">Dark</div>
     </div>
 <script>
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+        window.location.href = "mobile.html";
+    }
     const darkModeBtn = document.querySelector('.dark-mode-btn');
     const homeBtn = document.querySelector('.home-btn');
     const body = document.querySelector('body');
