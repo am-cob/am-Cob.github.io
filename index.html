@@ -48,6 +48,7 @@
         .show-logo {
             opacity: 1;
         }
+
         @media only screen and (max-width: 600px) {
             .logo {
                 max-width: 40%;
@@ -60,7 +61,7 @@
             left: -200px;
             width: 150px;
             height: 150px;
-            background-image: url("assets/images/WAVE1.png");
+            background-image: url("assets/images/WAVE.gif");
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center center;
@@ -71,7 +72,6 @@
         .show-wave {
             bottom: 0;
             left: 0;
-            background-image: url("assets/images/WAVE2.png");
         }
     </style>
     <script>
@@ -84,30 +84,14 @@
         });
 
         function toggleWave() {
-    var wave = document.querySelector('.wave');
-    if (!wave.classList.contains('show-wave')) {
-        wave.classList.add('show-wave');
-        setTimeout(function() {
-            wave.style.backgroundImage = 'url("assets/images/WAVE2.png")';
-        }, 500);
-        setTimeout(function() {
-            wave.style.backgroundImage = 'url("assets/images/WAVE1.png")';
-        }, 1000);
-        setTimeout(function() {
-            wave.style.backgroundImage = 'url("assets/images/WAVE2.png")';
-        }, 1500);
-       setTimeout(function() {
-            wave.style.backgroundImage = 'url("assets/images/WAVE1.png")';
-        }, 2000);
-        setTimeout(function() {
-            wave.style.backgroundImage = 'url("assets/images/WAVE2.png")';
-        }, 2500);
-        setTimeout(function() {
-            wave.style.backgroundImage = 'url("assets/images/WAVE1.png")';
-            wave.classList.remove('show-wave');
-        }, 3000);
-    }
-}
+            var wave = document.querySelector('.wave');
+            if (!wave.classList.contains('show-wave')) {
+                wave.classList.add('show-wave');
+                setTimeout(function() {
+                    wave.classList.remove('show-wave');
+                }, 3000);
+            }
+        }
     </script>
 </head>
 <body>
@@ -115,4 +99,3 @@
     <div class="wave"></div>
 </body>
 </html>
-
