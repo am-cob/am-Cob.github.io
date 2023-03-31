@@ -12,6 +12,27 @@
             padding: 0;
             height: 100vh;
             overflow: hidden;
+            position: relative;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background-image: url("assets/images/BG.png");
+            background-size: cover;
+            background-repeat: repeat-y;
+            background-position: center center;
+            filter: blur(0px);
+            transition: filter 3s ease-in-out;
+        }
+
+        body.blurred::after {
+            filter: blur(2px);
         }
 
         .logo {
@@ -21,30 +42,30 @@
             transform: translate(-50%, -50%);
             max-width: 20%;
             opacity: 0;
-            transition: opacity 3s ease-in-out; /* Add a transition effect to the opacity property */
+            transition: opacity 3s ease-in-out;
         }
 
-        /* Add a class to show the logo after it has faded in */
         .show-logo {
             opacity: 1;
         }
 
-        /* Add a media query for smaller screens */
         @media only screen and (max-width: 600px) {
             .logo {
-                max-width: 55%; /* Change the logo size for smaller screens */
+                max-width: 55%;
             }
         }
     </style>
     <script>
-        // Check if user is on a mobile device
         if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            // Redirect user to mobile version of the website
             window.location.href = "mobile.html";
         }
+
+        window.addEventListener('load', function() {
+            document.querySelector('body').classList.add('blurred');
+        });
     </script>
 </head>
 <body>
-    <img src="assets/images/LOGO.png" alt="Logo" class="logo" onload="this.classList.add('show-logo')"> <!-- Add onload attribute to show the logo after it has loaded -->
+    <img src="assets/images/LOGO.png" alt="Logo" class="logo" onload="this.classList.add('show-logo')">
 </body>
 </html>
