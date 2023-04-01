@@ -38,9 +38,9 @@
         .logo {
             position: absolute;
             top: 30%;
-            left: 50%;
+            left: 49%;
             transform: translate(-50%, -50%);
-            max-width: 20%;
+            max-width: 15%;
             opacity: 0;
             transition: opacity 3s ease-in-out;
         }
@@ -49,15 +49,35 @@
             opacity: 1;
         }
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 700px) {
             .logo {
-                max-width: 40%;
+                max-width: 30%;
             }
+        }
+
+        .buttons {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: space-between;
+            width: 40%;
+        }
+
+.button {
+    max-width: 85%;
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+}
+
+	  .show-btns {
+            opacity: 1;
         }
 
         .wave {
             position: fixed;
-            bottom: -200px;
+            bottom: 0px;
             left: -200px;
             width: 150px;
             height: 150px;
@@ -96,6 +116,10 @@
 </head>
 <body>
     <img src="assets/images/LOGO.png" alt="Logo" class="logo" onclick="toggleWave()" onload="this.classList.add('show-logo')">
-    <div class="wave"></div>
+    <div class="buttons">
+        <a href="#"><img src="assets/images/PORTFOLIO.png" alt="Portfolio" class="button" onload="this.classList.add('show-btns')"></a>
+        <a href="#"><img src="assets/images/SOCIALS.png" alt="Socials" class="button" onload="this.classList.add('show-btns')"></a>
+        <a href="#"><img src="assets/images/CONTACT.png" alt="Contact" class="button" onload="this.classList.add('show-btns')"></a>
+</div>
+<div class="wave"></div>
 </body>
-</html>
