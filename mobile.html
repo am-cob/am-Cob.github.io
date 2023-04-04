@@ -15,49 +15,89 @@
             position: relative;
         }
 
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-            background-image: url("assets/images/BG.png");
-            background-size: cover;
-            background-repeat: repeat-y;
-            background-position: center center;
-            filter: blur(0px);
-            transition: filter 3s ease-in-out;
-        }
+            body::after {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: -1;
+                background-image: url("assets/images/BG.png");
+                background-size: cover;
+                background-repeat: repeat-y;
+                background-position: center center;
+                filter: blur(0px);
+                transition: filter 3s ease-in-out;
+            }
 
-        body.blurred::after {
-            filter: blur(3px);
-        }
+            body.blurred::after {
+                filter: blur(2px);
+            }
 
         .logo {
             position: absolute;
             top: 30%;
             left: 50%;
             transform: translate(-50%, -50%);
-            max-width: 45%;
+            max-width: 15%;
             opacity: 0;
             transition: opacity 3s ease-in-out;
         }
 
-        .show-logo {
-            opacity: 1;
+            .logo.show-logo {
+                opacity: 1;
+            }
+
+        .buttons {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: space-between;
+            width: 40%;
         }
 
-        @media only screen and (max-width: 600px) {
-            .logo {
-                max-width: 55%;
+        .button {
+            max-width: 85%;
+            opacity: 0;
+            transition: opacity 3s ease-in-out;
+        }
+
+            .button.show-btns {
+                opacity: 1;
             }
+
+        .button-container {
+            position: relative;
+        }
+
+        .sub-buttons {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .sub-button {
+            margin-top: 10px;
+            max-width: 85%;
+        }
+
+        .button-container:hover .sub-buttons {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .wave {
             position: fixed;
-            bottom: -200px;
+            bottom: 0px;
             left: -200px;
             width: 150px;
             height: 150px;
@@ -69,13 +109,29 @@
             pointer-events: none;
         }
 
-        .show-wave {
-            bottom: 0;
-            left: 0;
+            .wave.show-wave {
+                bottom: 0;
+                left: 0;
+            }
+
+        @media only screen and (max-width: 700px) {
+            .logo {
+                max-width: 30%;
+            }
+
+            .buttons {
+                flex-direction: column;
+                top: 55%;
+                width: 60%;
+            }
+
+            .button-container {
+                margin-bottom: 20px;
+            }
         }
     </style>
     <script>
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             document.querySelector('body').classList.add('blurred');
         });
 
@@ -83,7 +139,7 @@
             var wave = document.querySelector('.wave');
             if (!wave.classList.contains('show-wave')) {
                 wave.classList.add('show-wave');
-                setTimeout(function() {
+                setTimeout(function () {
                     wave.classList.remove('show-wave');
                 }, 3000);
             }
@@ -92,6 +148,30 @@
 </head>
 <body>
     <img src="assets/images/LOGO.png" alt="Logo" class="logo" onclick="toggleWave()" onload="this.classList.add('show-logo')">
+    <div class="buttons">
+        <div class="button-container">
+            <a href="#"><img src="assets/images/PORTFOLIO.png" alt="Portfolio" class="button" onload="this.classList.add('show-btns')"></a>
+            <div class="sub-buttons">
+                <a href="#"><img src="assets/images/PHOTO.png" alt="Photography" class="sub-button"></a>
+                <a href="#"><img src="assets/images/VIDEO.png" alt="Videography" class="sub-button"></a>
+            </div>
+        </div>
+        <div class="button-container">
+            <a href="#"><img src="assets/images/SOCIALS.png" alt="Socials" class="button" onload="this.classList.add('show-btns')"></a>
+            <div class="sub-buttons">
+                <a href="#"><img src="assets/images/DISCORD.png" alt="Discord" class="sub-button"></a>
+                <a href="#"><img src="assets/images/TWITTER.png" alt="Twitter" class="sub-button"></a>
+                <a href="#"><img src="assets/images/INSTAGRAM.png" alt="Instagram" class="sub-button"></a>
+            </div>
+        </div>
+        <div class="button-container">
+            <a href="#"><img src="assets/images/CONTACT.png" alt="Contact" class="button" onload="this.classList.add('show-btns')"></a>
+            <div class="sub-buttons">
+                <a href="#"><img src="assets/images/WIP.png" alt="WIP" class="sub-button"></a>
+            </div>
+        </div>
+    </div>
+
     <div class="wave"></div>
 </body>
 </html>
