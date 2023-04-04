@@ -135,6 +135,10 @@
             window.location.href = "mobile.html";
         }
 
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
         window.addEventListener('load', function () {
             document.querySelector('body').classList.add('blurred');
         });
