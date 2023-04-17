@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Paint</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            background-color: white;
+            image-rendering: pixelated;
+            position: absolute;
+            transform-origin: top left;
+        }
+        .controls {
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+            z-index: 10;
+        }
+        .brush-size-container,
+        .pixelation-container {
+            margin-top: 10px;
+        }
+        .brush-size-container label,
+        .pixelation-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .color-container {
+            margin-top: 10px;
+        }
+        .color-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="controls">
+    <div class="color-container">
+        <label for="colorPicker">Color:</label>
+        <input type="color" id="colorPicker" name="colorPicker" value="#000000">
+    </div>
+    <div class="brush-size-container">
+        <label for="brushSize">Brush size:</label>
+        <input type="range" id="brushSize" name="brushSize" min="1" max="10" value="2">
+    </div>
+    <div class="pixelation-container">
+        <label for="pixelation">Pixelation:</label>
+        <input type="range" id="pixelation" name="pixelation" min="1" max="10" value="4">
+    </div>
+</div>
+<canvas id="paintCanvas"></canvas>
+<script>
+    const canvas = document.getElementById('paintCanvas');
+    const ctx = canvas.getContext('2d');
+    const brushSizeSlider = document.getElementById('brushSize');
+    const colorPicker = document.getElementById('colorPicker');
+    const pixelationSlider = document.getElementById('pixelation');
+
+    let scaleFactor = parseInt(pixelationSlider.value);
+    setCanvasSize();
+
+    let painting = false;
+    let currentColor = colorPicker.value;
+    let brushSize = brushSizeSlider.value;
+
+    function startPosition(e) {
+        painting = true;
+        draw(e);
+    }
+
+    function endPosition() {
+        painting = false;
+        ctx.beginPath();
+    }
+
+    function draw(e) {
+        if (!painting) return;
+        ctx.lineWidth = brushSize;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = currentColor;
+
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = (e.clientX - rect.left) * scaleX;
+        const y = (e.clientY - rect.top) * scaleY;
+
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+
+    function setCanvasSize() {
+        canvas.width = window.innerWidth / scaleFactor;
+        canvas.height = window.innerHeight / scaleFactor;
+
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+    }
+
+    function updatePixelation() {
+        scaleFactor = parseInt(pixelationSlider.value);
+        setCanvasSize();
+    }
+
+    window.addEventListener('resize', setCanvasSize);
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', endPosition);
+    canvas.addEventListener('mousemove', draw);
+
+    colorPicker.addEventListener('input', function() {
+      currentColor = this.value;
+    });
+
+    brushSizeSlider.addEventListener('input', function() {
+      brushSize = this.value;
+    });
+
+    pixelationSlider.addEventListener('input', function() {
+      updatePixelation();
+    });
+  </script>
+</body>
+</html>
